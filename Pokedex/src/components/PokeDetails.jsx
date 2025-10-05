@@ -2,6 +2,20 @@ import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { getPokemon } from '../http/pokeapi';
 
+const PokemonImage = styled.img`
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+`;
+
+const PokemonName = styled.h2`
+  font-size: 2rem;
+  text-transform: capitalize;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.white};
+`;
+
 export function PokeDetails({ idOrName = 'pikachu' }) {
   const [pokemon, setPokemon] = useState(null);
   const [loading, setLoading] = useState(true);
