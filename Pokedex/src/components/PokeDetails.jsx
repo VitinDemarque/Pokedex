@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styled, { keyframes } from 'styled-components';
 import { getPokemon } from '../http/pokeapi';
 
 export function PokeDetails({ idOrName = 'pikachu' }) {

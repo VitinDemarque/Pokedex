@@ -1,3 +1,8 @@
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { listPokemons, getTypes } from '../http/pokeapi';
+
+
 export default function PokeList({ onPick }) {
   const [page, setPage] = useState(1);
   const [pageSize] = useState(20);
