@@ -10,6 +10,26 @@ const typeColors = {
   steel: '#B7B7CE', fairy: '#D685AD',
 };
 
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const DetailsWrapper = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(2)};
+  animation: ${fadeIn} 0.5s ease-out;
+`;
+
 const PokemonImage = styled.img`
   width: 200px;
   height: 200px;
@@ -23,6 +43,68 @@ const PokemonName = styled.h2`
   font-weight: 700;
   color: ${({ theme }) => theme.colors.white};
 `;
+
+const TypesContainer = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing(1)};
+`;
+
+const TypeBadge = styled.span`
+  padding: ${({ theme }) => theme.spacing(0.5)} ${({ theme }) => theme.spacing(2)};
+  border-radius: ${({ theme }) => theme.radius.lg};
+  background-color: ${(props) => typeColors[props.type] || '#777'};
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: ${({ theme }) => theme.shadows.sm};
+`;
+
+const StatsContainer = styled.div`
+  width: 100%;
+  margin-top: ${({ theme }) => theme.spacing(2)};
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing(1)};
+`;
+
+const StatRow = styled.div`
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(1)};
+  width: 100%;
+`;
+
+const StatLabel = styled.span`
+  font-weight: bold;
+  text-transform: capitalize;
+  text-align: right;
+  font-size: 0.9rem;
+`;
+
+const StatBar = styled.div`
+  width: 100%;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: ${({ theme }) => theme.radius.md};
+  overflow: hidden;
+`;
+
+const StatProgress = styled.div`
+  height: 100%;
+  width: ${({ value }) => (value / 255) * 100}%; // Max stat é 255
+  background-color: ${({ theme }) => theme.colors.primary};
+  border-radius: ${({ theme }) => theme.radius.md};
+  transition: width 0.5s ease-in-out;
+  text-align: right;
+  padding-right: 5px;
+  color: #333;
+  font-size: 0.8rem;
+  font-weight: bold;
+  line-height: 20px;
+`;
+
 
 export function PokeDetails({ idOrName = 'pikachu' }) {
   const [pokemon, setPokemon] = useState(null);
