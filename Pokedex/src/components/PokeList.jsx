@@ -67,6 +67,17 @@ export default function PokeList({ onPick }) {
         ))}
       </ListGrid>
 
+        <PaginationContainer>
+        <PageButton disabled={page === 1} onClick={() => setPage((n) => n - 1)}>
+          Anterior
+        </PageButton>
+        <span>
+          Página {page} de {data.totalPages}
+        </span>
+        <PageButton disabled={page === data.totalPages} onClick={() => setPage((n) => n + 1)}>
+          Próxima
+        </PageButton>
+      </PaginationContainer>
     
     </>
   );
