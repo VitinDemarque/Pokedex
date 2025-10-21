@@ -24,7 +24,9 @@
 🌐 Consumo da PokéAPI — integração com a PokéAPI para buscar os dados.
 
 
+
 ## 📦 Ferramentas e Tecnologias Utilizadas
+
 
 🧠 Linguagens e Estrutura
 
@@ -34,11 +36,15 @@ Styled Components — estilização e responsividade da interface.
 
 Vite — criação de componentes reutilizáveis e renderização dinâmica.
 
+
+
 🌐 Integração com API
 
 PokéAPI — API pública usada para obter informações dos Pokémons (nome, tipo, imagem, habilidades etc.).
 
 Axios — para realizar as requisições HTTP de forma simples e eficiente.
+
+
 
 ⚙️ Ferramentas de Desenvolvimento
 
@@ -49,6 +55,8 @@ Vite — ambiente de desenvolvimento rápido para React.
 Git e GitHub — controle de versão e hospedagem do código.
 
 VS Code — editor de código principal.
+
+
 
 ## 🛠️ Como rodar o projeto localmente
   1. Clone o Repositório do GitHub:
