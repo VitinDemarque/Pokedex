@@ -106,19 +106,17 @@ const StatProgress = styled.div`
 `;
 
 
-export function PokeDetails({ idOrName = 'pikachu' }) {
+export function PokeDetails({ idOrName = 'pikachu', onLoading  }) {
   const [pokemon, setPokemon] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
+    onLoading?.(true);
     getPokemon(idOrName)
       .then(setPokemon)
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, [idOrName]);
+      .catch((err) => { console.error(err); setPokemon(null); })
+      .finally(() => onLoading?.(false));
+  }, [idOrName, onLoading]);
 
-  if (loading) return <p>Carregando...</p>;
   if (!pokemon) return <p>Pokémon não encontrado.</p>;
 
   return (

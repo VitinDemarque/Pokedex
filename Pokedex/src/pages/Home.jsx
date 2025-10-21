@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import styled from "styled-components";
 import PokeList from "../components/PokeList";
 import { PokeDetails } from "../components/PokeDetails";
+import CenteredLoader from "../components/Loader";
 
 const Grid = styled.main`
   max-width: 1400px;
@@ -47,22 +48,28 @@ const PlaceholderText = styled.p`
 
 export default function Home() {
   const [selected, setSelected] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const onLoading = useCallback((is) => setLoading(Boolean(is)), []);
 
   return (
-    <Grid>
-      <Panel>
-        <Title>Pokédex</Title>
-        <PokeList onPick={(name) => setSelected(name)} />
-      </Panel>
+    <>
+      {loading && <CenteredLoader />}
+      <Grid>
+        <Panel>
+          <Title>Pokédex</Title>
+          <PokeList onPick={(name) => setSelected(name)} onLoading={onLoading} />
+        </Panel>
 
-      <Panel>
-        <Title>Detalhes</Title>
-        {selected ? (
-          <PokeDetails idOrName={selected} />
-        ) : (
-          <PlaceholderText>Selecione um Pokémon para ver os detalhes</PlaceholderText>
-        )}
-      </Panel>
-    </Grid>
+        <Panel>
+          <Title>Detalhes</Title>
+          {selected ? (
+            <PokeDetails idOrName={selected} onLoading={onLoading} />
+          ) : (
+            <PlaceholderText>Selecione um Pokémon para ver os detalhes</PlaceholderText>
+          )}
+        </Panel>
+      </Grid>
+    </>
   );
 }

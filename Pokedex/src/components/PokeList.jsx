@@ -117,7 +117,7 @@ const PageButton = styled.button`
 `;
 
 
-export default function PokeList({ onPick }) {
+export default function PokeList({ onPick, onLoading }) {
   const [page, setPage] = useState(1);
   const [pageSize] = useState(20);
   const [search, setSearch] = useState('');
@@ -126,14 +126,20 @@ export default function PokeList({ onPick }) {
   const [data, setData] = useState({ items: [], totalPages: 1, total: 0 });
 
   useEffect(() => {
-    getTypes().then(setTypes).catch(console.error);
-  }, []);
+    onLoading?.(true);
+    getTypes()
+      .then(setTypes)
+      .catch(console.error)
+      .finally(() => onLoading?.(false));
+  }, [onLoading]);
 
   useEffect(() => {
+    onLoading?.(true);
     listPokemons({ page, pageSize, search, type, withDetails: true })
       .then(setData)
-      .catch(console.error);
-  }, [page, pageSize, search, type]);
+      .catch(console.error)
+      .finally(() => onLoading?.(false));
+  }, [page, pageSize, search, type, onLoading]);
 
   const handlePick = (name) => {
     if (onPick) onPick(name);
